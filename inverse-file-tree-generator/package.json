@@ -1,0 +1,70 @@
+{
+  "name": "inverse-file-tree-generator",
+  "displayName": "Inverse File Tree Generator",
+  "description": "can do both genarateing file trees and also generating files from file trees",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:inverseFileTree.generate",
+    "onCommand:inverseFileTree.generateFromEditor"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "inverseFileTree.generate",
+        "title": "Inverse File Tree: Generate Files from Text"
+      },
+      {
+        "command": "inverseFileTree.generateFromEditor",
+        "title": "Inverse File Tree: Generate Files from Editor Selection"
+      }
+    ],
+    "configuration": {
+      "title": "Inverse File Tree Generator",
+      "properties": {
+        "inverseFileTree.overwritePolicy": {
+          "type": "string",
+          "enum": [
+            "skip",
+            "prompt",
+            "overwrite"
+          ],
+          "default": "skip",
+          "description": "Default overwrite policy for existing files."
+        },
+        "inverseFileTree.baseDirectory": {
+          "type": "string",
+          "default": "${workspaceFolder}",
+          "description": "Base directory where files will be created (supports ${workspaceFolder})."
+        }
+      }
+    }
+  },
+  "icon": "icon.png",
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
