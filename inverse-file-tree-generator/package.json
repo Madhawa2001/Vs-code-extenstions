@@ -46,6 +46,10 @@
       }
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Madhawa2001/Vs-code-extenstions/tree/main/inverse-file-tree-generator"
+  },
   "icon": "icon.png",
   "scripts": {
     "vscode:prepublish": "npm run build",
@@ -53,6 +57,7 @@
     "watch": "tsc -watch -p ./",
     "compile": "tsc -p ./"
   },
+  "publisher": "avishka123",
   "devDependencies": {
     "@types/vscode": "^1.70.0",
     "@types/mocha": "^10.0.10",
