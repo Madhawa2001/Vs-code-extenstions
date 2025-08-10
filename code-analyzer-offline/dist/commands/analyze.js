@@ -154,24 +154,40 @@ function renderRationaleDocument(items) {
     });
     let md = "";
     for (const [file, its] of byFile.entries()) {
-        md += `\n---\n\n# Rationale: ${file}\n\n`;
+        md += `\n---\n\n# 📄 Rationale Document: \`${file}\`\n\n`;
         for (const it of its) {
-            md += `\n## ${it.type}: ${it.name}\n\n`;
-            md += `**Signature:** \`${it.signature ?? ""}\`\n\n`;
-            md += `**LOC:** ${it.loc}  \n**Params:** ${it.params}  \n**Cyclomatic complexity (approx):** ${it.complexity}\n\n`;
-            md += `**Calls:** ${it.calls.length ? it.calls.join(", ") : "none"}\n\n`;
-            md += `**Docstring / Comments:** ${it.doc ? `\n\n${it.doc}\n\n` : "None"}\n\n`;
-            md += `**Snippet:**\n\n\`\`\`\n${it.snippet ?? ""}\n\`\`\`\n\n`;
-            // Fill the Rationale Document per function as requested
-            md += `---\n\n## Rationale Document\n\n### Purpose\nExplain the overall goal of this function/file and the problem it tries to solve.\n\n### Function-by-Function Analysis\n- **${it.name}**: Purpose, details. Complexity: ${it.complexity}. Params: ${it.params}.\n\n### Design Decisions & Trade-offs\nDiscuss design choices visible here.\n\n### Possible Origin Prompt\n"Likely prompt text here"\n\n### Inspiration & References\n- Possible patterns or libs referenced by the code.\n\n### Improvement Suggestions\n- Suggest improvements (readability, security, tests).\n\n\n`;
+            md += `## 🔹 ${it.type.charAt(0).toUpperCase() + it.type.slice(1)}: **${it.name}**\n\n`;
+            md += `| Attribute | Details |\n`;
+            md += `| --------- | ------- |\n`;
+            md += `| **Signature** | \`${it.signature ?? "N/A"}\` |\n`;
+            md += `| **Lines of Code (LOC)** | ${it.loc} |\n`;
+            md += `| **Parameters** | ${it.params} |\n`;
+            md += `| **Cyclomatic Complexity (approx.)** | ${it.complexity} |\n`;
+            md += `| **Function Calls** | ${it.calls.length ? it.calls.join(", ") : "None"} |\n`;
+            md += `| **Docstring / Comments** | ${it.doc ? it.doc.replace(/\n/g, " ") : "None"} |\n\n`;
+            md += `<details>\n<summary>📝 Rationale Document</summary>\n\n`;
+            md += `### Purpose\n`;
+            md += `Explain the overall goal of this function/file and the problem it tries to solve.\n\n`;
+            md += `### Function-by-Function Analysis\n`;
+            md += `- **${it.name}**: Purpose, details. Complexity: ${it.complexity}. Params: ${it.params}.\n\n`;
+            md += `### Design Decisions & Trade-offs\n`;
+            md += `Discuss design choices visible here, pros and cons.\n\n`;
+            md += `### Possible Origin Prompt\n`;
+            md += `> "Likely prompt text here"\n\n`;
+            md += `### Inspiration & References\n`;
+            md += `- Possible design patterns, libraries, or concepts referenced.\n\n`;
+            md += `### Improvement Suggestions\n`;
+            md += `- Suggestions for improvements (readability, security, testing, etc).\n\n`;
+            md += `<!-- Example diagram placeholder -->\n`;
+            md += `![Design Diagram](https://via.placeholder.com/600x150?text=Design+Diagram)\n`;
+            md += `</details>\n\n`;
         }
     }
-    // Add single-file summary header if only one file
     if (byFile.size === 1) {
-        md = `# Generated Rationale Document\n\n${md}`;
+        md = `# 🧾 Generated Rationale Document\n\n${md}`;
     }
     else {
-        md = `# Generated Rationale Document (workspace)\n\n${md}`;
+        md = `# 🧾 Generated Rationale Document (Workspace)\n\n${md}`;
     }
     return md;
 }
